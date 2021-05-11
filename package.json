@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "echo 'Running your tests'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -34,5 +34,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://jeremythemodernist.github.io/react-gh-page/"
 }

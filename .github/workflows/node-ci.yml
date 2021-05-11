@@ -1,0 +1,40 @@
+name: Deploy React App to Github Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code:
+      - name: Checkout the Code 🛎️
+        uses: actions/checkout@v2
+
+      # install node js
+      - name: Setup Node JS
+        uses: actions/setup-node@v1
+        # use a specific version node js
+        with:
+          node-version: 12
+      # do a fresh install of node modules using no cache
+      # https://michaelcurrin.github.io/code-cookbook/recipes/ci-cd/github-actions/workflows/node/ci-installs.html
+      - name: Do Fresh Install of Dependencies 🔧
+        run: npm ci
+
+      - name: Run Tests 🚨
+        run: npm test
+
+      # build the files
+      - name: Build App 🏗️
+        run: npm run build
+
+      # https://github.com/peaceiris/actions-gh-pages
+      # deploy your react app to github pages
+      - name: Deploy to GH Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # this is not a personal access token but a unique token generated for the purposes of this one time use
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build
